@@ -48,11 +48,11 @@ a {
     .slider__item:nth-child(2), .slider__item:nth-child(7) {
       background-color: deepskyblue; }
     .slider__item:nth-child(3) {
-      background-color: yellowgreen; }
+      background-color: sandybrown; }
     .slider__item:nth-child(4) {
-      background-color: mediumvioletred; }
+      background-color: palevioletred; }
     .slider__item:nth-child(5) {
-      background-color: darkred; }
+      background-color: yellowgreen; }
   .slider__button {
     position: absolute;
     bottom: 0;
