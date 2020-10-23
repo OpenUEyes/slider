@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+$container-padding-side-left-right: 20vw;
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 10vh $container-padding-side-left-right;
+  display: flex;
+  flex-direction: column;
+}
+
+.slider {
+  $frame-width: 100vw - $container-padding-side-left-right * 2;
+  $frame-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  position: relative;
+  width: $frame-width;
+  height: $frame-height;
+
+  &__list {
+    display: flex;
+    position: relative;
+    top: 0;
+    width: 50000px;
+    height: 100%;
+
+    &--transitionend {
+      transition: left .5s linear;
+    }
+  }
+
+  &__item {
+    color: #000;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: $frame-width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15rem;
+
+    &:nth-child(1), &:nth-child(6) {
+      background-color: coral;
+    }
+
+    &:nth-child(2), &:nth-child(7) {
+      background-color: deepskyblue;
+    }
+
+    &:nth-child(3) {
+      background-color: yellowgreen;
+    }
+
+    &:nth-child(4) {
+      background-color: mediumvioletred;
+    }
+
+    &:nth-child(5) {
+      background-color: darkred;
+    }
+  }
+
+  &__button {
+    $button-height: 40px;
+    $button-width: 40px;
+
+    position: absolute;
+    bottom: 0;
+    width: $button-width;
+    height: $button-height;
+    border-radius: 20px;
+    background: #fff no-repeat center;
+    cursor: pointer;
+
+    &--prev {
+      left: 0;
+
+      &:active {
+        transform: scale(.8);
+      }
+    }
+
+    &--next {
+      right: 0;
+
+      &:active {
+        transform: scale(.8);
+      }
+    }
+  }
+
+  &__radio {
+    margin-top: 60px;
+    margin-bottom: 10px;
+  }
+}
+
+.radio {
+  display: flex;
+  justify-content: center;
+  //margin-top: 4vh;
+
+  &__label {
+    height: 15px;
+    width: 15px;
+    margin: 0 10px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover {
+
+      .radio__span {
+        background-color: #555;
+      }
+    }
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked {
+
+      & ~ .radio__span {
+        background-color: #ba8d23;
+        transform: scale(1.5);
+        transition: transform 1s;
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #ba8d23;
+    border-radius: 50%;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 2px;
+      right: 2px;
+      bottom: 2px;
+      left: 2px;
+      //left: 50%;
+      //width: 8px;
+      //height: 8px;
+      border-radius: 50%;
+      background-color: #555;
+    }
+  }
+}
