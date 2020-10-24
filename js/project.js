@@ -48,7 +48,8 @@
              Before our moving mouse or upping and next we specify custom these events.
              On mouse moving or upping automatically (browser) create new true custom event.
         */
-        e.preventDefault();
+        // when passive listener do not need
+        // e.preventDefault();
 
         posStart = sliderList.offsetLeft;
         // if block in progress of scrolling, we restrict touch
@@ -91,7 +92,8 @@
     function dragEnd(e) {
         e = e || window.event;
         // needs to stop executing queue after touch event(don't continue to mouse event)
-        e.preventDefault();
+        // when passive listener do not need
+        // e.preventDefault();
 
         if (e.type === 'touchend') {
             // touch check because touch events fixed to specified event(independent) listeners and don't execute one by one
@@ -116,9 +118,9 @@
     sliderList.onmousedown = dragStart;
 
     //all touch events specified independent so they do not execute one by one and we don't need to e.preventDefault();
-    sliderList.addEventListener('touchstart', dragStart);
-    sliderList.addEventListener('touchmove', dragAction);
-    sliderList.addEventListener('touchend', dragEnd);
+    sliderList.addEventListener('touchstart', dragStart, {passive: true});
+    sliderList.addEventListener('touchmove', dragAction, {passive: true});
+    sliderList.addEventListener('touchend', dragEnd, {passive: true});
 
     function shiftSlide(step, dragged) {
         sliderList.classList.add('slider__list--transitionend');
@@ -188,6 +190,7 @@
 
         document.getElementById('radio-' + tempIndex).checked = true;
     }
+
     // put checked to current slide radio
     indicateRadio();
 
