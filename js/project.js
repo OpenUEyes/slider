@@ -48,8 +48,6 @@
              Before our moving mouse or upping and next we specify custom these events.
              On mouse moving or upping automatically (browser) create new true custom event.
         */
-        // when passive listener do not need
-        // e.preventDefault();
 
         posStart = sliderList.offsetLeft;
         // if block in progress of scrolling, we restrict touch
@@ -63,6 +61,8 @@
             // touch check because touch events fixed to specified event(independent) listeners and don't execute one by one
             allowTouch = true;
         } else {
+            // double click break scrolling without
+            e.preventDefault();
             posX1 = e.clientX;
             document.onmousemove = dragAction;
             document.onmouseup = dragEnd;
@@ -92,8 +92,7 @@
     function dragEnd(e) {
         e = e || window.event;
         // needs to stop executing queue after touch event(don't continue to mouse event)
-        // when passive listener do not need
-        // e.preventDefault();
+        e.preventDefault();
 
         if (e.type === 'touchend') {
             // touch check because touch events fixed to specified event(independent) listeners and don't execute one by one
@@ -120,7 +119,7 @@
     //all touch events specified independent so they do not execute one by one and we don't need to e.preventDefault();
     sliderList.addEventListener('touchstart', dragStart, {passive: true});
     sliderList.addEventListener('touchmove', dragAction, {passive: true});
-    sliderList.addEventListener('touchend', dragEnd, {passive: true});
+    sliderList.addEventListener('touchend', dragEnd);
 
     function shiftSlide(step, dragged) {
         sliderList.classList.add('slider__list--transitionend');
